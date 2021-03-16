@@ -1,6 +1,16 @@
 stages:
+  - build
   - fit
     
+build_image:
+  stage: build
+  variables:
+    TO: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+  tags:
+    - docker-image-build
+  script:
+    - ignore
+
 fit_simple:
   stage: fit
   image: rootproject/root-conda
@@ -15,8 +25,3 @@ fit_simple:
     paths:
     - fit_outputs
     expire_in: 1 week
-    
-
-    
-
-
